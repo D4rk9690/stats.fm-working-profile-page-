@@ -3,8 +3,15 @@
 <head>
 	<title>My Profile</title>
 	<style>
+
+		@font-face {
+  font-family: myFirstFont;
+  src: url(./font/StatsfmSans-Bold.ttf);
+}
+
+
 		body {
-			font-family: Arial, sans-serif;
+			font-family: myFirstFont;
 			margin: 0;
 			padding: 0;
             background-color: #111112;
@@ -21,6 +28,7 @@
 			padding-right: 400px;
 			background-color: #18181c;
 			border-radius: 10px;
+			font-family: myFirstFont;
 		}
 
 
@@ -57,12 +65,14 @@
 			font-weight: bold;
 			margin: 0 0 10px;
             color: white;
+			font-family: myFirstFont;
 		}
 
 		.bio {
 			font-size: 16px;
 			margin: 0 0 20px;
             color:white;
+			font-family: myFirstFont;
 		}
 
         .bio a{
@@ -70,6 +80,7 @@
 			margin: 0 0 20px;
             color: #1ed760;
             font-weight: bold;
+			font-family: myFirstFont;
 		}
 
 
@@ -82,14 +93,15 @@
 			padding: 0;
 			margin: 0;
             color: white;
+			font-family: myFirstFont;
 		}
 
 		.stats li {
-			flex-basis: 30%;
+			flex-basis: 20%;
 			margin: 10px 0;
-			padding: 10px;
+			padding: 20px 20px 0px 50px;
 			text-align: center;
-
+			font-family: myFirstFont;
 		}
 
         /* .stats li:hover{
@@ -125,6 +137,22 @@ $datadone = $data->items;
 // STATS SETTINGS
 $stream = number_format($datadone->count);
 
+
+
+// STREAMED TIME SETTINGS
+$ms = $datadone->durationMs;
+$second = $datadone->durationMs / 1000;
+$minutes = $second / 60;
+$hours = $minutes / 60;
+$days = $hours / 24;
+$months = $days / 30;
+
+// STREAMED MORE
+
+$artist = $datadone->cardinality->artists;
+$albums = $datadone->cardinality->albums;
+$tracks = $datadone->cardinality->tracks;
+
 ?>
 
 
@@ -135,7 +163,7 @@ $stream = number_format($datadone->count);
 			<img src="./profile.jpg" alt="Profile Picture">
 		</div>
 		<div class="info">
-			<div class="name">Noah_Dep <span style="color: #a3a3a3; font-size: 16px"><?php echo $profilegender ?></span></div>
+			<div class="name"><span style="color: #a3a3a3"> Hello,</span> Noah_Dep <span style="color: #a3a3a3; font-size: 16px"><?php echo $profilegender ?></span></div>
 			<div class="bio"><?php echo $profilebio ?></div>
 			<div class="bio"> <p style="font-weight: bold; color: #a3a3a3;"> 21 Friends</p></div>
 			
@@ -148,24 +176,24 @@ $stream = number_format($datadone->count);
 					<p style="font-weight: bold; color: #a3a3a3;"> Streams</p>
 				</li>
 				<li>
-					<h3>Location</h3>
-					<p>New York</p>
+					<h3><?php echo number_format($minutes) ?></h3>
+					<p style="font-weight: bold; color: #a3a3a3;">Minutes</p>
 				</li>
 				<li>
-					<h3>Experience</h3>
-					<p>5 years</p>
+					<h3><?php echo number_format($hours); ?></h3>
+					<p style="font-weight: bold; color: #a3a3a3;">Hours</p>
 				</li>
 				<li>
-					<h3>Skills</h3>
-					<p>HTML, CSS, JavaScript, PHP</p>
+					<h3><?php echo number_format($artist) ?></h3>
+					<p style="font-weight: bold; color: #a3a3a3;">Artists</p>
 				</li>
 				<li>
-					<h3>Education</h3>
-					<p>Bachelor's Degree in Computer Science</p>
+					<h3><?php echo number_format($albums) ?></h3>
+					<p style="font-weight: bold; color: #a3a3a3;">Albums</p>
 				</li>
 				<li>
-					<h3>Interests</h3>
-					<p>Reading, hiking, playing guitar</p>
+					<h3><?php echo number_format($tracks) ?></h3>
+					<p style="font-weight: bold; color: #a3a3a3;">Tracks</p>
 				</li>
 			</ul>
 	</div>
