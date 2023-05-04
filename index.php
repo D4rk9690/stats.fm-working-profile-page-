@@ -17,7 +17,21 @@
 			align-items: center;
 			padding: 20px;
             padding-top: 150px;
+			padding-left: 400px;
+			padding-right: 400px;
 			background-color: #18181c;
+			border-radius: 10px;
+		}
+
+
+		.containerstats {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+			padding-left: 200px;
+			padding-right: 200px;
 			border-radius: 10px;
 		}
 
@@ -39,7 +53,7 @@
 		}
 
 		.name {
-			font-size: 24px;
+			font-size: 36px;
 			font-weight: bold;
 			margin: 0 0 10px;
             color: white;
@@ -48,8 +62,7 @@
 		.bio {
 			font-size: 16px;
 			margin: 0 0 20px;
-            font-weight: bold;
-            color:#ccc;
+            color:white;
 		}
 
         .bio a{
@@ -99,12 +112,18 @@
 
 
 <?php 
-$data = json_decode(file_get_contents("https://beta-api.stats.fm/api/v1/users/fxdvy4o7zxvr320l3tvoeqytj/streams/stats?range=lifetime"));
+// INFO PROFILE
+$infouser = json_decode(file_get_contents("./user.json"));
+$profilelink = $infouser->profile->spotifyid;
+$profilebio = $infouser->profile->bio;
+$profilegender = $infouser->profile->gender;
 
+//  API CALL
+$data = json_decode(file_get_contents("https://beta-api.stats.fm/api/v1/users/".$profilelink ."/streams/stats?range=lifetime"));
 $datadone = $data->items;
 
+// STATS SETTINGS
 $stream = number_format($datadone->count);
-
 
 ?>
 
@@ -116,12 +135,17 @@ $stream = number_format($datadone->count);
 			<img src="./profile.jpg" alt="Profile Picture">
 		</div>
 		<div class="info">
-			<div class="name">Noah_Dep</div>
-			<div class="bio">I'm a web developer from New York. <a> hello </a> I love coding and learning new things.</div>
-			<ul class="stats">
+			<div class="name">Noah_Dep <span style="color: #a3a3a3; font-size: 16px"><?php echo $profilegender ?></span></div>
+			<div class="bio"><?php echo $profilebio ?></div>
+			<div class="bio"> <p style="font-weight: bold; color: #a3a3a3;"> 21 Friends</p></div>
+			
+		</div>
+	</div>
+	<div class="containerstats">
+	<ul class="stats">
 				<li>
-					<h3>Streams</h3>
-					<p><?php echo $stream ?></p>
+					<h3><?php echo $stream ?></h3>
+					<p style="font-weight: bold; color: #a3a3a3;"> Streams</p>
 				</li>
 				<li>
 					<h3>Location</h3>
@@ -144,7 +168,6 @@ $stream = number_format($datadone->count);
 					<p>Reading, hiking, playing guitar</p>
 				</li>
 			</ul>
-		</div>
 	</div>
 </body>
 </html>
